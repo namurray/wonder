@@ -1,0 +1,55 @@
+{% paginate collection.products by 48 %}
+
+
+<div id="collection-description" class="desktop-12 mobile-3">
+  <div class="section-title lines"><h2>{% if collection.handle == 'all' %}{{ 'collections.general.all_products' | t }}{% else %}{{ collection.title }}{% endif %}</h2></div>
+  <!--{{ collection.description }}-->
+</div>
+
+<div class="clear"></div>
+
+
+
+{% if collection.handle == 'live-original' %}
+<div id="live-original" class="text-center">
+    <div class="row">
+      	<img src="{{ "sadie-signature.jpg" | asset_url }}" />
+        <iframe class="mobile-3 tablet-5 desktop-8 center fn" src="https://www.youtube.com/embed/OG6tdz3Vsus?autoplay=0&amp;showinfo=0&amp;autohide=1&amp;rel=0&amp;wmode=transparent" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+{% endif %}
+
+
+{% if settings.filters %}
+<div id="full-width-filter" class="desktop-12 mobile-3">
+  {% include 'filter' %}
+</div>
+{% endif %}  
+
+<div class="desktop-12 mobile-3">
+  <div id="product-loop">
+    
+    {% for product in collection.products %}
+    
+    <div class="product-index desktop-4 mobile-3{% cycle ' first', '', ' last' %}" id="prod-{{ product.id }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">          
+      
+      {% include 'product-listing' %}
+      
+    </div>
+    
+    {% endfor %} 
+    
+  </div>
+</div>
+
+<div align="center"><script type="text/javascript" data-pp-pubid="3bfbe41c1b" data-pp-placementtype="468x60"> (function (d, t) {
+"use strict";
+var s = d.getElementsByTagName(t)[0], n = d.createElement(t);
+n.src = "//paypal.adtag.where.com/merchant.js";
+s.parentNode.insertBefore(n, s);
+}(document, "script"));
+</script></div>
+
+{% endpaginate %}
+
+

@@ -1,0 +1,246 @@
+<div id="shopping-cart" class="desktop-12 tablet-6 mobile-3">
+  
+  <div class="row">
+      <div class="desktop-12 tablet-6 mobile-3">
+          <div class="section-title lines desktop-12"><h2>My Cart</h2></div>
+      </div>
+    </div>
+  {% if cart.item_count == 0 %}
+  <h3 style="text-align: center; margin: 120px 0 0 0; color: {{ settings.second_color }}">- Your cart is currently empty -</h3>
+  
+  
+  {% else %}
+  <script type="text/javascript">
+    function remove_item(id) {
+      document.getElementById('updates_'+id).value = 0;
+      document.getElementById('cartform').submit();
+    }
+  </script>
+  <form action="/cart" method="post" id="cartform">
+    
+    <table class="desktop-9 tablet-6 mobile-3">
+      <thead>
+        <tr>
+          <th>{{ 'cart.general.product' | t }}</th>
+          <th>{{ 'cart.general.price' | t }}</th>
+          <th style="text-align: center;">{{ 'cart.general.qty' | t }}</th>
+          <th style="text-align: center;">{{ 'cart.general.remove' | t }}</th>
+          <th>{{ 'cart.general.price' | t }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart.items %}
+        
+        <tr>
+          <td>
+            <div class="cart-item">
+              <div class="cart-image">
+                <a href="{{ item.url }}" title="{{ item.product.title | escape }}">
+                  <img src="{{ item.image | product_img_url: 'compact' }}"  alt="{{ item.product.featured_image.alt | escape }}" />
+                </a>
+              </div>
+              <div class="cart-title">
+                {% if settings.vendor %}<p>{{ item.vendor }}</p>{% endif %}
+                <p class = "itemTitleList" >{{ item.title }}</p>
+              </div>
+            </div>
+          </td>
+          <td>
+            <p>{{ item.price | money }}{% if item.variant.compare_at_price > item.price %}<br /><del>{{ item.variant.compare_at_price | money }}</del>{% endif %}</p>          
+          </td>
+          <td>
+            <input type="text" class="cart-qty" size="4" name="updates[{{ item.id }}]" id="updates_{{ item.variant.id }}" value="{{ item.quantity }}" onfocus="this.select();" style="max-width: 50px; text-indent: 0; text-align: center; margin: 0 auto 10px; "/>    
+          </td>
+          <td style="text-align: center">
+            <p><a href="#" onclick="remove_item({{ item.variant.id }}); return false;"><i class="icon-trash icon-2x"></i></a></p>
+          </td>
+          <td>
+            <p>{{ item.line_price | money }}</p>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+    
+    <div id="basket-right" class="desktop-3 tablet-6 mobile-3">
+      <h4>{{ 'cart.general.subtotal' | t }} {{ cart.total_price | money }}</h4>
+      <p><a href="/collections">{{ 'cart.general.continue' | t }}</a></p>
+      <input type="submit" name="update" id="update-cart" value="{{ 'cart.general.update' | t }}" class="button" />
+      <input type="submit" name="checkout" id="checkout" value="{{ 'cart.general.checkout' | t }}" class="button" />
+      <div class="clear"></div>
+      
+<div align="center"><script type="text/javascript" data-pp-pubid="3bfbe41c1b" data-pp-placementtype="468x60"> (function (d, t) {
+"use strict";
+var s = d.getElementsByTagName(t)[0], n = d.createElement(t);
+n.src = "//paypal.adtag.where.com/merchant.js";
+s.parentNode.insertBefore(n, s);
+}(document, "script"));
+</script></div>
+      {% if additional_checkout_buttons %} {{ content_for_additional_checkout_buttons }}<br/>{% endif %}
+      
+      {% if settings.american_express %}<img src="{{ 'amex.png' | asset_url }}"/>{% endif %}
+      {% if settings.dankort %}<img src="{{ 'dankort.png' | asset_url }}"/>{% endif %}
+      {% if settings.diners %}<img src="{{ 'diners.png' | asset_url }}"/>{% endif %}
+      {% if settings.discover %}<img src="{{ 'discover.png' | asset_url }}"/>{% endif %}
+      {% if settings.forbru %}<img src="{{ 'forbru.png' | asset_url }}"/>{% endif %}
+      {% if settings.google %}<img src="{{ 'googlecheckout.png' | asset_url }}">{% endif %}
+      {% if settings.jcb %}<img src="{{ 'jcb.png' | asset_url }}">{% endif %}
+      {% if settings.maestro %}<img src="{{ 'maestro.png' | asset_url }}"/>{% endif %}
+      {% if settings.mastercard %}<img src="{{ 'mastercard.png' | asset_url }}"/>{% endif %}
+      {% if settings.paypal %}<img src="{{ 'paypa.png' | asset_url }}"/>{% endif %}  
+      {% if settings.solo %}<img src="{{ 'solo.png' | asset_url }}"/>{% endif %}  
+      {% if settings.visa %}<img src="{{ 'visa.png' | asset_url }}"/>{% endif %}
+      <a class="secure-banner" href="http://www.shopify.com/?utm_source=secure&amp;utm_medium=shop" title="This online store is secured by Shopify" target="_blank"><img src="{{ 'shopify-secure2.png' | asset_url }}"/></a>
+    </div>
+        
+      
+    <div id="cart-notes" class="desktop-12 mobile-3">
+      <label for="note">Add special instructions to your order:</label>
+      <textarea name="note" id="note" >{{cart.note}}</textarea>  
+    </div>    
+
+    
+  </form>
+  {% endif %}
+  
+  {% assign _product = all_products[settings.donation_product] %}
+  
+  <div class="donation hide">
+    <div class="wrapper">
+      <img src="{{_product.featured_image | img_url: 'master' }}"/>
+      <div>
+        <h2>{{ _product.title }}</h2>
+        <p>{{ _product.description }}</p>
+        <form action="/cart/add" method="post" data-money-format="{{ shop.money_format }}" id="product-form-{{ _product.id }}">
+          <div class="values">
+            <div><span>Donation Value</span></div>
+            {% for _variant in _product.variants %}
+              <input id="swatch-{{ forloop.index0 }}-{{ _variant.handle }}-{{ _product.id }}" type="radio" name="id" value="{{ _variant.id }}"{% if forloop.first %} checked{% endif %} {% unless _variant.available %}disabled{% endunless %} />
+              <label class="animation" for="swatch-{{ forloop.index0 }}-{{ _variant.handle }}-{{ _product.id }}">
+              {{ _variant.title }}              
+            </label>
+            {% endfor %}            
+          </div>
+          <input type="submit" class="submit" value="DONATE"/>
+          <input type="button" class="cancel" value="NOT NOW"/>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="pop-up hide">
+    <div class="wrapper">
+      <div class="image-wrapper">
+      	<img src="{{settings.popup_image | img_url: 'master' }}"/>
+      </div>
+      <div class="text-wrapper">
+        <p>{{ settings.popup_text }}</p>
+        <a href="{{ settings.popup_link}}" target="_blank" class="submit">Yes</a>
+        <input type="button" class="cancel" value="No, thanks"/>        
+      </div>
+    </div>
+  </div>
+  
+  
+</div>
+
+<script>
+
+  var itemTitleList = document.getElementsByClassName('itemTitleList');
+  var bootLinerFlag = false;
+  
+  for (x in itemTitleList){
+  
+    if(itemTitleList[x].innerText != undefined ){
+      if(itemTitleList[x].innerText.indexOf('Liner') != -1){
+      	bootLinerFlag = true;
+      }
+    }
+  	
+  }
+  
+  
+  $('#checkout').click(function(e){   
+    
+    
+    if(!bootLinerFlag){
+    
+      $.fancybox.open($('.pop-up'),{
+        tpl:{
+          closeBtn : '<a title="Close" class="fancybox-item fancybox-close popup" href="javascript:;">CLOSE <i class="fa icon-remove" aria-hidden="true"></i></a>',
+        },
+        afterClose: function(){
+          $.fancybox.open($('.donation'),{
+            tpl:{
+              closeBtn : '<a title="Close" class="fancybox-item fancybox-close donate" href="/checkout">CLOSE <i class="fa icon-remove" aria-hidden="true"></i></a>',
+            },
+            afterClose: function(){
+            	window.location = "/checkout";
+            },
+            helpers: {
+              overlay : {
+                locked: false
+              }
+            }
+          });
+        },
+        helpers: {
+              overlay : {
+                  locked: false
+              }
+          }
+      });
+
+      e.preventDefault();
+      return false;  	
+    }
+    
+    else {
+      	console.log("Entro al else");
+      
+    	$.fancybox.open($('.donation'),{
+            tpl:{
+              closeBtn : '<a title="Close" class="fancybox-item fancybox-close donate" href="/checkout">CLOSE <i class="fa icon-remove" aria-hidden="true"></i></a>',
+            },
+            afterClose: function(){
+            	window.location = "/checkout";
+            },
+        	  helpers: {
+              overlay : {
+              locked: false
+              }
+          }
+      	});
+
+      e.preventDefault();
+      return false; 
+    }
+  	 
+  });
+  
+  
+  $('.pop-up .cancel, .pop-up .submit').click(function(){
+    $.fancybox.close($('.pop-up'))
+  });
+  
+   $('.donation .cancel').click(function(){
+     window.location = "/checkout"
+   });
+  
+  
+  $("#product-form-{{ _product.id }}").submit(function(e){
+      var form = $(this);
+      e.preventDefault();
+      $.ajax( {
+        type: "POST",
+        url: form.attr( 'action' ),
+        data: form.serialize(),
+        success: function( response ) {
+          window.location = "/checkout"
+        }
+      });
+    return false;
+  });
+</script>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+  
+  <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '226263911142186'); // Insert your pixel ID here.
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=226263911142186&ev=PageView&noscript=1"
+/></noscript>
+<!-- DO NOT MODIFY -->
+<!-- End Facebook Pixel Code -->
+  
+  <meta name="msvalidate.01" content="581235DC300C850870F5BA01773F0285" />
+
+<script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"5476826"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script><noscript><img src="//bat.bing.com/action/0?ti=5476826&Ver=2" height="0" width="0" style="display:none; visibility: hidden;" /></noscript>
+  
+  <meta name="google-site-verification" content="DIOSRRtH-zbeTgWZxRUjCpPFL-0_89T519uzM2QrWBc" />
+  
+  <meta charset="utf-8" />
+  
+  <!-- Basic Page Needs
+================================================== -->
+  
+  <title>
+    {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}" />
+  {% endif %}
+  <link rel="canonical" href="{{ canonical_url }}" />
+  
+  <!-- Fonts -->
+   <link href="http://overpass-30e2.kxcdn.com/overpass.css" rel="stylesheet" type='text/css' />
+  
+  <!-- CSS
+================================================== -->
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet" type='text/css' />
+  {{ 'font-awesome.css' | asset_url | stylesheet_tag }}
+  {{ 'flexslider.css' | asset_url | stylesheet_tag }}
+  {{ 'queries.css' | asset_url | stylesheet_tag }}
+  {{ 'jquery.fancybox.css' | asset_url | stylesheet_tag }}
+  {{ 'wonder-styles.scss.css' | asset_url | stylesheet_tag }}
+  <!--[if IE 8 ]>{{ 'ie8.css' | asset_url | stylesheet_tag }}<![endif]-->
+  
+  <!--[if IE 7]>
+	{{ 'font-awesome-ie7.css' | asset_url | stylesheet_tag }}
+  <![endif]-->
+  
+  <!-- JS
+================================================== -->
+  
+  
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  
+  {{ 'theme.js' | asset_url | script_tag }} 
+  {{ 'option_selection.js' | shopify_asset_url | script_tag }}  
+  {{ 'jquery.cookie.js' | asset_url | script_tag }}
+  {{ 'handlebars.js' | asset_url | script_tag }}
+  {{ 'api.js' | asset_url | script_tag }}  
+  {{ 'select.js' | asset_url | script_tag }}  
+  {{ 'jquery.easing.1.3.js' | asset_url | script_tag }}
+  {{ 'jquery.placeholder.js' | asset_url | script_tag }}  
+  {{ 'modernizr.custom.js' | asset_url | script_tag }}
+  {{ 'jquery.fancybox.js' | asset_url | script_tag }}
+  {{ 'jquery.dlmenu.js' | asset_url | script_tag }}  
+  {{ 'jquery.flexslider.js' | asset_url | script_tag }}
+  {{ 'jquery.rwdImageMaps.min.js' | asset_url | script_tag }}
+  {{ 'jquery.mousewheel-3.0.6.pack.js' | asset_url | script_tag }}
+  {{ 'jquery.elevateZoom-2.5.5.min.js' | asset_url | script_tag }}
+  
+
+  <!--[if lt IE 9]>
+<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <!-- Favicons
+================================================== -->
+  
+  <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}">
+  
+  {% if template contains 'customers' %}
+  {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+  {{ "customer_area.js"  | shopify_asset_url | script_tag }}
+  {% endif %}
+  
+  {{ content_for_header }}
+  
+</head>
+
+<body class="gridlock {{ template | split: '.' | last }}">
+
+    <header>
+    <div class="row header">
+      <div class="desktop-4 mobile-1 header__logo">       
+        {{ 'wonder_logo-desktop.png' | asset_img_url: '150x' | img_tag }}
+      </div>
+      <div class="desktop-3 desktop-push-5 mobile-2 header__tools">  
+      
+      A C <a class="button">BUY NOW</a>
+      </div>
+      
+    </div>
+    </header>
+  
+    
+    <div class="row slider">
+        <div class="desktop-12">   
+           {{'wonder_slider.jpg' | asset_img_url: 'master' | img_tag: 'Wonder Movie','slider__image' }}   
+        </div>
+    </div>
+    
+    <div class="row display-flex">
+            <div class="desktop-6 mobile-3 logos">
+                {{'wonder_roma-liongate.png' | asset_img_url: '400x' | img_tag }}
+            </div>
+            <div class="desktop-6 mobile-3 about1">
+               <p>To help spread WONDER this holiday season, Roma has partnered with Lionsgate to produce this <br />
+                   <span class="extrabold">special-edition Wonder Boot</span></p>
+            </div>
+    </div>
+    
+    <div class="row mission">
+       {{ 'wonder_photo.jpg' | asset_img_url: 'master' | img_tag: 'Girl with roman boots','mission__img' }}
+        <div class="desktop-7 desktop-push-5 mobile-3 mission__statement">
+            {{ page.content }}
+        </div>
+    </div>
+    {{ content_for_layout }}
+    
+  <footer>
+    <div class="row">
+      <div class="desktop-8 mobile-3 footerlinks">
+       <ul class="footer__social-links">
+         <li class="footer__link">Follow Us</li>
+          <li class="footer__link"><a href="{{ settings.facebook_url }}" target="_blank"><i class="icon-facebook"></i></a></li>
+          <li class="footer__link"><a href="http://www.twitter.com/{{ settings.twittername }}" target="_blank"><i class="icon-twitter"></i></a></li>
+          <li class="footer__link"><a href="{{ settings.pinterest_url }}" target="_blank"><i class="icon-pinterest"></i></a></li>
+          <li class="footer__link"><a href="{{ settings.youtube_url }}" target="_blank"><i class="icon-youtube"></i></a></li>
+        </ul>
+         <ul class="footer__mpaa-links">
+        {% for link in linklists.wonder-footer.links %}
+         <li class="footer__link"><a href="{{ link.url }}" class="">{{ link.title }}</a></li>
+        {% endfor %}
+        </ul>
+      </div>
+      <div class="desktop-4 mobile-3 footerlogos">
+       {{ 'wonder_logos-footer.png' | asset_img_url: '350x' | img_tag:'partner logos' }}
+       {{ 'wonder_pg.png' | asset_img_url: '150x' | img_tag:'Rated PG','footerlogos__rating' }}
+      </div> 
+      </div>
+    </footer>
+     <div class="row footer__sub">
+      <div class="desktop-12">
+         <span>Motion Picture Artwork © 2017 Lions Gate Entertainment Inc. All Rights Reserved.</span>
+      </div>
+    </div>
+  
+  {{ '//ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' | script_tag }}
+  {{ 'jquery.products.min.js' | asset_url | script_tag }}
+  
+  
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=127142210767229";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+ 
+<!-- google dynamic remarketing tag for theme.liquid -->
+    {% if template contains 'product' %}
+        <script type="text/javascript">
+            var json_product = {{ product | json }};
+        </script>
+        <script>
+            var ecomm_prodid=[];
+            for(var i=0;i<json_product.variants.length;i++)
+            	ecomm_prodid.push('shopify_US_{{product.id}}_'+json_product.variants[i].id);
+        </script>
+        <script type="text/javascript">
+            var google_tag_params = {
+            	ecomm_prodid: ecomm_prodid,
+            	ecomm_pagetype: 'product',
+            	ecomm_totalvalue: {{ product.price | money_without_currency | remove: ","}}
+            };
+        </script>
+    {% elsif template contains 'cart' %}
+        <script type="text/javascript">
+            var google_tag_params = {
+            	ecomm_prodid: [{% for item in cart.items %}'shopify_US_{{item.product.id}}_{{item.variant.id}}',{% endfor %}],
+            	ecomm_pagetype: 'cart',
+            	ecomm_totalvalue: {{ cart.total_price | money_without_currency | remove: ","}}
+            };
+        </script>
+    {% elsif template contains 'index' %}
+        <script type="text/javascript">
+	        var google_tag_params = {
+            	ecomm_prodid: '',
+            	ecomm_pagetype: 'home',
+            	ecomm_totalvalue: 0
+            };
+        </script>
+    {% else %}
+        <script type="text/javascript">
+            var google_tag_params = {
+            	ecomm_prodid: '',
+            	ecomm_pagetype: 'other',
+            	ecomm_totalvalue: 0
+            };
+        </script>
+	{% endif %}
+  
+ <script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 868304949;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/868304949/?guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+</body>
+</html>
+<!-- <script type="text/javascript" src="//badge.topratedlocal.com/load-badge/default/right?mobile=pin"></script><a href="http://www.topratedlocal.com/roma-boots-reviews" id="trl-badge-poweredby">Powered by Top Rated Local&reg;</a> -->

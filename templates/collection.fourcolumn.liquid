@@ -1,0 +1,40 @@
+{% paginate collection.products by 48 %}
+
+
+<div id="collection-description" class="desktop-12 mobile-3">
+  <h1>{{ collection.title }}</h1>
+  {{ collection.description }}  
+</div>
+
+<div class="clear"></div>
+
+{% if settings.filters %}
+<div id="full-width-filter" class="desktop-12 mobile-3">
+  {% include 'filter' %}
+</div>
+{% endif %}  
+
+
+
+<div class="desktop-12 tablet-6 mobile-3" id="four-per-row">
+  <div id="product-loop">
+    
+    {% for product in collection.products %}
+    
+    <div class="product-index desktop-3 mobile-3{% cycle ' first', '', '', ' last' %}" id="prod-{{ product.id }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">   
+     
+            {% include 'product-listing' %}
+      
+    </div>
+    
+    {% endfor %} 
+    
+  </div>
+</div>
+
+
+{% include 'pagination' %}
+
+{% endpaginate %}
+
+

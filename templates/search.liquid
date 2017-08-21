@@ -1,0 +1,133 @@
+{% paginate search.results by 24 %}  	
+<div id="page" class="desktop-12 tablet-6 mobile-3">
+  <div class="row">
+      <div class="desktop-12 tablet-6 mobile-3">
+          <div class="section-title lines desktop-12"><h2>SEARCH OUR STORE</h2></div>
+      </div>
+    </div>
+
+
+  <div id="search-bar">
+    <form action="/search" method="get">
+      {% if search.performed %}
+      {% if search.results_count == 0 %}
+      <p>{{ 'general.search.no_results_html' | t: terms: search.terms }}</p>
+      {% else %}
+      <p>{{ 'general.search.results_for_html' | t: terms: search.terms }}</p>
+      {% endif %}
+      {% endif %}
+      <input type="text" name="q" id="q" placeholder="{{ 'general.search.placeholder' | t }}"/>
+      <input type="hidden" name="type" value="product" />
+    </form>
+  </div>
+</div>
+
+{% if search.performed %}
+
+<div class="desktop-12 tablet-6 mobile-3" id="four-per-row">
+  <div id="product-loop">
+    {% for item in search.results %} 
+
+    <div class="product-index desktop-3 mobile-3{% cycle ' first', '', ' mlast', ' last' %}" id="prod-{{ item.id }}" data-alpha="{{ item.title }}" data-price="{{ item.price }}">   
+
+      <div class="product-index-inner">
+        {% if item.available %}
+        {% for col in product.collections %}
+        {% if col.handle == 'new' %}
+        <div class="new icn">{{ 'products.general.new' | t }}</div>
+        {% endif %}
+        {% endfor %}
+
+        
+        {% assign on_sale = false %}	
+        {% unless customer.tags contains 'Wholesaler' %}	
+          {% assign pr =  item %}	
+          {% include 'wholesaler-collection-price'%}	
+            {% if pr_compare_at_price > pr_price %}	
+            {% assign on_sale = true %}	
+            {% endif %}	
+        {%endunless%}	
+        
+        {% if on_sale %}
+        <div class="sale-item icn">{{ 'products.general.sale' | t }}</div>
+        {% endif %}
+
+        {% endif %}          
+      </div>        
+
+
+      <a href="{{ item.url }}" title="{{ item.title | escape }}">
+        {{ item.featured_image | product_img_url: 'large' | img_tag }}
+      </a>
+
+
+      <div class="product-info"> 
+
+        <div class="product-info-inner">
+          <a href="{{ item.url }}"> 
+            {% if settings.vendor %}<p>{{ item.vendor }}</p>{% endif %}
+            <h3>{{ item.title }}</h3>
+          </a>        
+
+          
+          
+           {% if customer.tags contains 'Wholesaler' %}		
+    {% include 'wholesaler-product-price'%}  
+    
+    
+    <div class="price">
+      
+      <div class="prod-price"> {{ min_price | money }} </div>
+       
+    </div>
+    
+    
+{%else%}		
+    {% assign pr =  item %}		
+    {% include 'wholesaler-collection-price'%}		
+	 <div class="price">
+      {% if on_sale %}
+      <div class="onsale">{{ pr_price | money }}</div>
+      <div class="was">{{ pr_compare_at_price | money }}</div>
+      {% else %}
+      <div class="prod-price">{% if pr_varies %} {{ 'products.general.from' | t }} {{ pr_price_min | money }} - {{ pr_price_max | money }} {% else %}{{ pr_price | money }}{% endif %}</div>
+      {% endif %}	
+    </div>	
+{%endif%}		
+    
+     
+    
+          
+          
+          
+          
+          
+           {%comment%}
+          <div class="price">
+            {% if item.price < item.compare_at_price %}
+            <div class="onsale">{{ item.price | money }}</div>
+            <div class="was">{{ item.compare_at_price | money }}</div>
+            {% else %}
+            <div class="prod-price">{% if item.price_varies %} {{ 'products.general.from' | t }} {{ item.price_min | money }} - {{ item.price_max | money }} {% else %}{{ item.price | money }}{% endif %}</div>
+            {% endif %}	
+          </div>
+          {%endcomment%}
+          
+          
+
+        </div>
+
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% include 'pagination' %}
+
+{% endif %}
+
+{% endpaginate %}
+
+

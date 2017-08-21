@@ -1,0 +1,47 @@
+<div id="page" class="desktop-12 tablet-6 mobile-3">
+  <div class="section-title lines desktop-12"><h2>{% if current_tags %}{{ blog.title | link_to: blog.url }} &raquo; {{ current_tags.first }}{% else %}{{ blog.title }}{% endif %}</h2></div>
+  
+  <div class="clear"></div>
+  
+  <div class="desktop-12 tablet-6 mobile-3">
+    <div id="article-loop">
+      
+      {% for article in blog.articles  %}
+      
+      <div class="article-index ie4col{% cycle ' iefirst', '', ' ielast' %}" id="article-{{ article.id }}" data-alpha="{{ article.title }}">   
+        
+        <div class="article-info"> 
+                  {% if article.image %}<a href="{{ article.url }}"><img class="article-image" src="{{ article.image | img_url: 'grande' }}" alt="{{ article.title }}"></a>{% endif %}
+
+          <div class="article-info-inner">
+            <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+            <p class="posted">Posted on {{ article.published_at | date: "%b %d, %y" }}</p>
+            
+            
+            <div class="article-content">
+              {% if article.excerpt == blank %}
+              {{ article.content | strip_html | truncate: 178 }}
+              {% else %}
+              {{ article.excerpt }}
+              {% endif %}
+            </div>
+            
+        
+            
+        <div class="readmore">
+          <a href="{{ article.url }}">{{ 'blogs.article.read_more' | t }}</a>
+        </div>
+            {% include 'social' with article %}
+        </div>
+          
+        </div>
+        
+      </div>
+      
+      {% endfor %} 
+      
+    </div>
+  </div>
+  
+  
+</div>

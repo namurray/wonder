@@ -1,0 +1,33 @@
+var showLowerVariants = false;			
+var metaMap = {};			
+{% for variant in product.variants %}			
+  metaMap["{{variant.id}}"] = "{{variant.metafields.Wholesaler.level | default: "0" }}";			
+{% endfor %}			
+var custLevel = "{{ customer.metafields.Wholesaler.level | default: 0 }}";			
+			
+function filterVariants(prod){			
+  var allVariants = prod.variants;			
+  prod.variants = [];			
+  //loop through every original variant			
+  $.each(allVariants, function(i,variant){			
+    if( metaMap[variant.id] == "0" ){			
+      var bestMatch = variant;			
+      var bestLevel = "0";			
+      if(showLowerVariants) prod.variants.push(bestMatch);			
+      var retailId = bestMatch.id.toString(); 			
+      //for every original variant, find out its ws variants, matching current customer level			
+      $.each(allVariants.slice(i+1), function(j,variant2){			
+        var wsLevel = metaMap[variant2.id] || "";			
+        if(wsLevel.substr(2) == retailId && wsLevel[0] > bestLevel && wsLevel[0] <= custLevel){			
+          bestMatch = variant2;			
+          bestLevel = wsLevel[0];                                                			
+          if(showLowerVariants) prod.variants.push(bestMatch);			
+        }			
+      });			
+      if(!showLowerVariants) prod.variants.push(bestMatch);			
+    }			
+  });       			
+n_variants = prod.variants.length			
+  return prod;			
+}			
+//if(n_variants == 1) $('.selector-wrapper').hide()			

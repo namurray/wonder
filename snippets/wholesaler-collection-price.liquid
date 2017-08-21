@@ -1,0 +1,60 @@
+{% assign pr_varies =  pr.price_varies %}				
+{% assign pr_price_max = pr.price_max %}				
+{% assign pr_price_min = pr.price_min %}				
+{% assign pr_compare_at_price_max = pr.compare_at_price_max %}				
+{% assign pr_compare_at_price_max = pr.compare_at_price_min %}				
+{% assign pr_compare_at_price= pr.compare_at_price %}				
+{% assign has_wholesaler_variants = false%}				
+{% for variant in pr.variants %}				
+{% if variant.metafields.Wholesaler.level or variant.title contains '(Wholesale' or variant.title contains '(wholesale' %}				
+{% assign has_wholesaler_variants = true%}				
+{% endif %}				
+{% endfor %}				
+{% if has_wholesaler_variants %}				
+{% if customer.tags contains 'Wholesaler' %}				
+{% assign pr_price = pr.price_min %}				
+{% assign pr_price_min = pr_price %}				
+{% assign pr_varies =  false %}				
+{% assign pr_price_max = pr_price %}				
+{% assign pr_compare_at_price_max = pr_price %}				
+{% assign pr_compare_at_price_min = pr_price %}				
+{% assign pr_compare_at_price= pr_price %}				
+{% for variant in pr.variants %}				
+{% if variant.metafields.Wholesaler.level or variant.title contains '(Wholesale' or variant.title contains '(wholesale' %}				
+{% if variant.price > pr_price_min %}				
+{% assign pr_varies =  true %}				
+{% assign pr_price_max = variant.price %}				
+{% assign pr_compare_at_price_max = variant.price %}				
+{% endif %}				
+{% endif %}				
+{% endfor %}				
+{% else %}				
+{% assign pr_price = pr.price_max %}				
+{% assign pr_price_min = pr_price %}				
+{% assign pr_varies =  false %}				
+{% assign pr_price_max = pr_price %}				
+{% assign pr_compare_at_price_max = pr_price %}				
+{% assign pr_compare_at_price_min = pr_price %}				
+{% assign pr_compare_at_price_max = 0 %}				
+{% assign pr_compare_at_price= pr.compare_at_price %}				
+{% for variant in pr.variants %}				
+{% if variant.metafields.Wholesaler.level or variant.title contains '(Wholesale' or variant.title contains '(wholesale' %}				
+{% else %}				
+{% if variant.price < pr_price %}				
+{% assign pr_varies = true %}				
+{% assign pr_price_min = variant.price %}				
+{% assign pr_price = variant.price %}				
+{% assign pr_compare_at_price_min = variant.price %}				
+{% endif %}				
+{% endif %}				
+{% endfor %}				
+{% endif %}				
+{% else %} 				
+{% assign pr_price = pr.price %}				
+{% assign pr_varies =  pr.price_varies %}				
+{% assign pr_price_max = pr.price_max %}				
+{% assign pr_price_min = pr.price_min %}				
+{% assign pr_compare_at_price_max = pr.compare_at_price_max %}				
+{% assign pr_compare_at_price_max = pr.compare_at_price_min %}				
+{% assign pr_compare_at_price= pr.compare_at_price %}				
+{% endif %}				

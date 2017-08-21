@@ -1,0 +1,6 @@
+development:
+  password: fcca841eceaab14607d93986933fd646
+  theme_id: "live"
+  store: https://roma-boots.myshopify.com
+  ignore_files: 
+    - config/settings_data.json

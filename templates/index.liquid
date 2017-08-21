@@ -1,0 +1,248 @@
+
+
+{% if settings.homepage-images %}
+	
+	{% include 'carousel' %}
+
+{% endif %}
+
+
+
+<div class="clear"></div>
+  {% if settings.giveaway_show and settings.giveaway_image %}	
+  <div id="giveaway">
+    <img src="{{settings.giveaway_image | img_url: 'master' }}"/>
+    <div class="overlay">
+      <div class="table">
+        <div class="table-cell">
+          <div class="row">
+            <div class="text">
+          		<span>{{ settings.giveaway_text}}</span>
+            </div>
+            <div class="btn-container">
+            	<a href="{{ settings.giveaway_link }}"><div class="btn">{{ settings.giveaway_btn }}</div></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% if settings.homepage-products %}  
+  
+{% if settings.homepage-collection-title ==  blank %}
+<div class="section-title lines desktop-12"><h2 class="newArrivals">{{ 'layout.homepage.products_title' | t }}</h2></div>
+{% else %}
+<div class="section-title lines desktop-12"><h2 class="newArrivals">{{ settings.homepage-collection-title }}</h2></div>
+{% endif %}  
+
+<div class="desktop-12 mobile-3">
+  <div class="customNavigation">
+    <a class="btn prev"><i class="icon-chevron-left"></i></a>
+    <a class="btn next"><i class="icon-chevron-right"></i></a>
+  </div>    
+  <div id="product-carousel">
+    {% for product in collections[settings.homepage-collection].products limit: settings.homepage-product-limit %}
+    <div class="product-car" id="prod-{{ product.id }}" data-alpha="{{ product.title }}" data-price="{{ product.price }}">
+
+      {% include 'product-listing' %}
+
+    </div>
+    {% endfor %}
+  </div>      
+</div>
+
+  {% endif %}
+  <div id="what-is-roma" class="row">
+    <div class="mobile-3 tablet-5 desktop-6 center fn">
+      <h1>Each Pair of Rain Boots Purchased will give a pair of Rain Boots to a child in need.</h1>
+      <div class="special"><span>&laquo;</span>&nbsp; ROMA means LOVE! &nbsp;<span>&raquo;</span></div>
+      <div>
+        <p>ROMA Boots merges fashion with philanthropy to give poverty the boot.</p>
+        <p>Our mission is to bring impoverished children throughout the world hope, love, and lasting change through aid and education.</p>
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+   
+
+
+<div class="clear"></div>
+{% endif %}
+  
+  <div id="boots-donated">
+    <!--<h1>Boots Donated</h1>
+    <h1 class="number">20,000</h1>
+    <h1>pairs</h1>-->
+    <div class="video">
+      <div class="row">
+        <iframe class="mobile-3 tablet-5 desktop-8 center fn" src="//www.youtube.com/embed/SOFGC-pIaDE?autoplay=0&amp;showinfo=0&amp;autohide=1&amp;rel=0&amp;wmode=transparent" frameborder="0" allowfullscreen=""></iframe>
+      </div>
+    </div>
+    <div id="our-story" class="row">
+      <div class="mobile-3 tablet-5 desktop-6 center fn">
+        <h1>ROMA Boots - Our Story</h1>
+        <div class="special"><span>&laquo;</span>&nbsp; ROMA Boots merges fashion with philanthropy to 'Give Poverty the Boot' &nbsp;<span>&raquo;</span></div>
+        <div>
+          <p>For every pair of boots sold, a new pair is donated to a child in need.</p>
+          <p>Additionally, ten percent of all proceeds funds educational initiatives around the world.</p>
+          <p>ROMA was founded in 2010 by Samuel Bistrian, who wanted to combine his love of fashion and philanthropy to help children in his home country of Romania.</p>
+        </div>
+        <div><a href="/pages/about-roma-boots"><div class="learn-more animation">LEARN MORE</div></a></div>
+      </div>
+    </div>
+  </div>
+
+<!-- This is where the map is going to be-->
+
+  <div class="world-map">
+    
+    <div class = "checkLocations">
+      <p>With your help we have been able to donate thousands of ROMA</p>
+      <p>Boots over the last five years in <strong>25 countries</strong> on five continents.</p>
+    </div>
+    <a href="pages/roma-boot-drops" target="_blank"><div id="bootDropsBtn">CHECK OUT THE LOCATIONS</div></a>
+    <div class="map">
+    	<img src="{{ 'map.png' | asset_url }}" />
+    </div>
+    <div class="content row">
+      <div class="desktop-12 tablet-12 mobile-3">
+        <div class="line"></div>
+        <div class="desktop-6 tablet-3 mobile-3">
+          <h1>Asia</h1>
+          <p>Nepal, Philippines, China, Mongolia, India, Armenia, Turkey</p>
+          <h1>Europe</h1>
+          <p>Romania, Moldova, Ukraine, Bulgaria</p>
+          <h1>Australia</h1>
+          <p>Vanuatu</p>
+        </div>
+        <div class="desktop-6 tablet-3 mobile-3">
+          <h1>Americas</h1>
+          <p style="">Guatemala, Colombia, United States, Honduras, El Salvador, Nicaragua, Haiti</p>
+          <h1>Africa</h1>
+          <p>Kenya, Ghana, Nigeria, Ethiopia, Tanzania</p>
+        </div>
+        <div style= "clear:both;"></div>
+        
+      </div>
+    </div>
+  </div>
+
+<!-- ./map -->  
+
+  <div id="get-pair" class="clearfix">
+    <div class="row">
+      <div class="mobile-3 tablet-5 desktop-7 center fn">
+        <h1>Get a Pair. Give a Pair.</h1>
+        <!--<div class="special"><span>&laquo;</span>&nbsp; Little feet are waiting Roma Boots and World Vision both believe &nbsp;<span>&raquo;</span></div>-->
+        <p>Join our mailing list to help us give poverty the boot!</p>
+        <form action="https://app.kevy.com/form_handlers/1249/f2n1pM" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate">
+        
+          <input value="" name="email" class="email" id="mce-EMAIL" placeholder="YOUR EMAIL" required="" type="email">
+          <input value="SIGN UP" name="subscribe" id="mc-embedded-subscribe" class="button" type="submit">
+          
+        </form>        
+      </div>
+    </div>
+  </div>
+
+<div id="content" class="row" {% if settings.display-wide %}style="margin-top: 20px"{% endif %}>
+  
+  {% if settings.homepage-collections %}
+  
+  
+  <div id="collection-loop">
+
+    {% if settings.homepage-collection-title ==  blank %}
+        <div class="section-title lines desktop-12"><h2>{{ 'layout.homepage.collections_title' | t }}</h2></div>
+    {% else %}
+        <div class="section-title lines desktop-12"><h2>{{ settings.homepage-collect-title }}</h2></div>
+    {% endif %}    
+    
+    {% for link in linklists[settings.home-collection-linklist].links %}
+    {% assign collection = link.object %}
+    <div class="collection-index desktop-3 tablet-2 mobile-3{% cycle ' first', '', '', ' last' %}" data-alpha="{{ collection.title }}">  
+      <div class="collection-image">
+        <a href="{{ collection.url }}" title="{{ collection_title }}">
+          {% if collection.image %}
+          {{ collection.image.src | collection_img_url: 'grande' | img_tag: collection_title }}
+          {% else %}
+          {{ collection.products.first.featured_image | product_img_url: 'grande' | img_tag: collection_title }}
+          {% endif %}
+        </a>     
+      </div>
+
+      <div class="collection-info">
+        <a href="{{ collection.url }}" title="{{ collection.title }}">
+          <h3>{{ collection.title }}<br />{{ 'collections.general.items_count' | t: count: collection.products_count }}</h3>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  
+  <div class="clear"></div>
+  
+  {% endif %}
+  
+  
+
+  
+  
+  {% if settings.pages %}
+  
+  <div id="index-content-left" class="desktop-12 tablet-6 mobile-3">
+    <div class="section-title lines"><h2>{{ pages[settings.pages-left].title }}</h2></div>  
+    <div class="pages-left-content">
+      {{ pages[settings.pages-left].content }}
+    </div>
+  </div>
+  
+  {% endif %}  
+  
+  
+  {% if settings.promo %}
+  <div id="promo-images">
+    <div class="desktop-4 tablet-2 mobile-3">
+      <a href="{{ settings.leftlink }}"><img src="{{ 'leftpromo.jpg' | asset_url }}" alt="{{ shop.name }}" style="border: 0;"/></a>
+    </div>
+    
+    <div class="desktop-4 tablet-2 mobile-3">
+      <a href="{{ settings.midlink }}"><img src="{{ 'midpromo.jpg' | asset_url }}" alt="{{ shop.name }}" style="border: 0;"/></a>
+    </div>
+    
+    <div class="desktop-4 tablet-2 mobile-3">
+      <a href="{{ settings.rightlink }}"><img src="{{ 'rightpromo.jpg' | asset_url }}" alt="{{ shop.name }}" style="border: 0;"/></a>
+    </div>
+  </div>
+  
+  <div class="clear"></div>  
+  
+  {% endif %} 
+  
+  
+  
+    {% if settings.show-instagram-feed %}    
+    {% assign url = '{{image}}' %}
+    {% assign caption = '{{caption}}' %}
+    <div id="instagram-card">
+    <div class="section-title lines"><h2><a href="http://instagram.com/{{ settings.instagram-id }}" target="_blank">{{ 'layout.homepage.instagram' | t }} @{{ settings.instagram-id }}</a> {{ 'layout.homepage.instagram_follow_where' | t }}</h2></div>  
+            <div id="instafeed"></div>
+      <script type="text/javascript">
+        var userFeed = new Instafeed({
+          get: 'user',
+          userId: {{ settings.instagram-user-id }},
+          accessToken: '{{ settings.instagram-access-token }}',
+          template: '<a class="fancybox desktop-2 mobile-half padded" href="{{url}}" rel="ig" title="{{ caption }}"><img class="instagram-image" src="{{ url }}" /><div class="magnify animation"></div></a>'
+        });
+        userFeed.run();        
+      </script>
+    </div>
+    {% endif %}  
+  
+  
+  
+  
+  
+</div>

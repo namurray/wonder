@@ -1,0 +1,143 @@
+{% if settings.display-wide %}
+{% else %}
+<div class="row">
+  <div class="desktop-12 mobile-3">
+    {% endif %}
+    
+    {% if settings.homepage-display == 'video' %}
+    <div class="videoWrapper">
+      {{ settings.video-embed }}
+    </div>
+    
+    {% elsif settings.homepage-display == 'slideshow' %}
+    <div class="flexslider">
+      <ul class="slides">
+        
+        <li>
+          <a href="{{ settings.slide0_url }}">
+            <div style = "position:absolute; z-index:99999999999; width:100%; height:100%;"></div>
+            <img src="{{ 'slide0.jpg' | asset_url }}" alt="{{shop.name}}" />
+            {% if settings.slide-0-mask %}<div class="mask"></div>{% endif %}
+          </a>         
+          {% if settings.slide-0-content %}
+          <div class="flex-caption">
+            {% if settings.slide-0-title != blank %}<p class="title">{{ settings.slide-0-title }}</p>{% endif %}
+            {% if settings.slide-0-caption != blank %}<p class="caption">{{ settings.slide-0-caption }}</p>{% endif %}
+            {% if settings.slide-0-button %}
+         	<div class="readmore">
+              <a href="{{ settings.slide0_url }}">{{ settings.slide-0-button-text }}</a>
+            </div>
+            {% endif %}            
+          </div>
+          {% endif %}  
+        </li>
+        
+        {% if settings.slide-1-check %}
+        <li>
+          <a href="{{ settings.slide1_url }}">
+            <img src="{{ 'slide1.jpg' | asset_url }}" alt="{{shop.name}}" />
+            {% if settings.slide-1-mask %}<div class="mask"></div>{% endif %}
+          </a>         
+          {% if settings.slide-1-content %}
+          <div class="flex-caption">
+            {% if settings.slide-1-title != blank %}<p class="title">{{ settings.slide-1-title }}</p>{% endif %}
+            {% if settings.slide-1-caption != blank %}<p class="caption">{{ settings.slide-1-caption }}</p>{% endif %}
+            {% if settings.slide-1-button %}
+            <div class="readmore">
+              <a href="{{ settings.slide1_url }}">{{ settings.slide-1-button-text }}</a>
+            </div>
+            {% endif %}            
+          </div>
+          {% endif %}  
+        </li>
+        {% endif %} 
+        
+        {% if settings.slide-2-check %}
+        <li>
+          <a href="{{ settings.slide2_url }}">
+            <img src="{{ 'slide2.jpg' | asset_url }}" alt="{{ settings.slide1_alt }}" />          
+            {% if settings.slide-2-mask %}<div class="mask"></div>{% endif %}                    
+          </a>
+          {% if settings.slide-2-content %}
+          <div class="flex-caption">
+            {% if settings.slide-2-title != blank %}<p class="title">{{ settings.slide-2-title }}</p>{% endif %}
+            {% if settings.slide-2-caption != blank %}<p class="caption">{{ settings.slide-2-caption }}</p>{% endif %}
+            {% if settings.slide-2-button %}
+            <div class="readmore">
+              <a href="{{ settings.slide2_url }}">{{ settings.slide-2-button-text }}</a>
+            </div>
+            {% endif %}            
+          </div>
+          {% endif %}           
+        </li>
+        {% endif %}
+        
+        {% if settings.slide-3-check %}
+        <li>
+          <a href="{{ settings.slide3_url }}">
+            <img src="{{ 'slide3.jpg' | asset_url }}" alt="{{ settings.slide2_alt }}" />
+            {% if settings.slide-3-mask %}<div class="mask"></div>{% endif %}            
+          </a>
+          {% if settings.slide-3-content %}
+          <div class="flex-caption">
+            {% if settings.slide-3-title != blank %}<p class="title">{{ settings.slide-3-title }}</p>{% endif %}
+            {% if settings.slide-3-caption != blank %}<p class="caption">{{ settings.slide-3-caption }}</p>{% endif %}
+            {% if settings.slide-3-button %}
+            <div class="readmore">
+              <a href="{{ settings.slide3_url }}">{{ settings.slide-3-button-text }}</a>
+            </div>
+            {% endif %}            
+          </div>
+          {% endif %}       
+        </li>
+        {% endif %}
+        
+        {% if settings.slide-4-check %}
+        <li>
+          <a href="{{ settings.slide4_url }}">
+            <img src="{{ 'slide4.jpg' | asset_url }}" alt="{{ settings.slide3_alt }}" />
+            {% if settings.slide-4-mask %}<div class="mask"></div>{% endif %}            
+          </a>
+          {% if settings.slide-4-content %}
+          <div class="flex-caption">
+            {% if settings.slide-4-title != blank %}<p class="title">{{ settings.slide-4-title }}</p>{% endif %}
+            {% if settings.slide-4-caption != blank %}<p class="caption">{{ settings.slide-4-caption }}</p>{% endif %}
+            {% if settings.slide-4-button %}
+            <div class="readmore">
+              <a href="{{ settings.slide4_url }}">{{ settings.slide-4-button-text }}</a>
+            </div>
+            {% endif %}            
+          </div>
+          {% endif %}            
+        </li>
+        {% endif %}
+        
+        {% if settings.slide-5-check %}
+        <li>
+          <a href="{{ settings.slide5_url }}">
+            <img src="{{ 'slide5.jpg' | asset_url }}" alt="{{ settings.slide5_alt }}" />
+            {% if settings.slide-5-mask %}<div class="mask"></div>{% endif %}            
+          </a>
+          {% if settings.slide-5-content %}
+          <div class="flex-caption">
+            {% if settings.slide-5-title != blank %}<p class="title">{{ settings.slide-5-title }}</p>{% endif %}
+            {% if settings.slide-5-caption != blank %}<p class="caption">{{ settings.slide-5-caption }}</p>{% endif %}
+            {% if settings.slide-5-button %}
+            <div class="readmore">
+              <a href="{{ settings.slide5_url }}">{{ settings.slide-5-button-text }}</a>
+            </div>
+            {% endif %}            
+          </div>
+          {% endif %}         
+        </li>
+        {% endif %}
+        
+      </ul>
+    </div> 
+    {% endif %} 
+    
+    {% if settings.display-wide %}
+    {% else %}
+  </div>
+</div>
+{% endif %}    

@@ -1,0 +1,7 @@
+<div class="share-icons social-goal">
+  <a title="{{ 'social.icons.facebook' | t }}" href="{{ settings.facebook_url }}" class="facebook" target="_blank"><i class="icon-facebook icon-2x"></i></a>
+  <a title="{{ 'social.icons.twitter' | t }}"  href="http://www.twitter.com/{{ settings.twittername }}" target="_blank" class="twitter"><i class="icon-twitter icon-2x"></i></a>
+  {% if template == 'collection' or template == 'product' or template == 'index' or template == 'page.2020_Goal' %}
+  <a title="{{ 'social.icons.pinterest' | t }}" target="blank" href="{{ settings.pinterest_url }}" class="pinterest"><i class="icon-pinterest icon-2x"></i></a>
+  {% endif %}
+</div>
